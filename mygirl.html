@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Centered Slideshow with Audio</title>
+  <style>
+    body {
+      background-color: pink;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column; /* Align elements vertically */
+      height: 100vh;
+      margin: 0;
+      transition: opacity 2s; /* Add transition for smooth disappearance */
+    }
+
+    .container {
+      background-color: white;
+      text-align: center;
+      width: 800px;
+      height: 800px;
+      max-width: 800px;
+      max-height: 800px;
+      opacity: 1; /* Initial opacity set to visible */
+      transition: opacity 2s; /* Add transition for smooth disappearance */
+      position: relative; /* Set position to relative for absolute positioning of audio controls */
+    }
+
+    .message-container {
+      background-color: white;
+      text-align: center;
+      width: 800px;
+      height: 800px;
+      max-width: 800px;
+      max-height: 800px;
+      opacity: 0; /* Initial opacity set to invisible */
+      transition: opacity 2s; /* Add transition for smooth appearance */
+      overflow: scroll;
+    }
+
+    .img {
+      width: 100%;
+      height: 100%;
+    }
+    
+    audio {
+      position: fixed; /* Set position to fixed */
+      bottom: 300px; /* Adjust the distance from the bottom */
+      left: 50%; /* Horizontally center the audio controls */
+      transform: translateX(-50%); /* Move controls back to the left by half of its own width */
+      z-index: 9999; /* Ensure the audio controls stay on top */
+      width: 500px;
+    }
+
+    p{
+      display: block;
+      padding: 10px 10px 10px 10px;
+      font-size: 30px;
+      text-align: left;
+      line-height: 60px;
+    }
+
+    span{
+      margin-bottom: 30px;
+      display: block;    
+    }
+    
+    b{
+      margin-top: 25px;
+      display: block;
+      text-align: right;
+      font-weight: normal;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <img src="play.jpg" class="img">
+</div>
+
+<audio id="myAudio" controls>
+  <source src="TJ Monterde - Palagi.mp3" type="audio/mpeg"> <!-- Replace 'music.mp3' with your audio file -->
+  Your browser does not support the audio element.
+</audio>
+
+<script>
+  const images = ["1.jpeg","2.jpeg","3.jpeg","4.jpeg","5.jpeg","6.jpeg","7.jpeg","8.jpeg","9.jpeg","10.jpeg","11.jpeg","12.jpeg","13.jpeg"]; // Update with your image names
+  let currentImageIndex = 0;
+
+  function showNextImage() {
+    if (currentImageIndex < images.length) {
+      setTimeout(() => {
+        const imageContainer = document.querySelector(".container");
+        imageContainer.innerHTML = `<img src="${images[currentImageIndex]}" class="img">`;
+        currentImageIndex++;
+
+        showNextImage(); // Recursively call the function for next image
+      }, 3000); // Change image every 2 seconds
+    } else {
+      // All images shown, now show a message
+      const bodyElement = document.querySelector("body");
+      const imageContainer = document.querySelector(".container");
+
+      // Fade out the image container
+      imageContainer.style.opacity = 0;
+
+      setTimeout(() => {
+        // Remove the image container
+        bodyElement.removeChild(imageContainer);
+
+        // Create a new container for the message
+        const messageContainer = document.createElement("div");
+        messageContainer.className = 'message-container';
+        messageContainer.innerHTML = "<p><span>To: yana<span>eloo this message will be very short lang, its been a long time na since i first met you, and its been 2months or 67 days narin simula nung nag confess ako sayoo (March 26). want kolang sabihin na mahal na mahal kita po and  pangako never magbabago tong feelings ko sayo. actually my feelings for you grew each  day nga araw araw nalang me naiinlove sayoo HAHAHAH iba ka and i know na palagi kona tong sinasabi sayoo pero i will never tire out or mapapagod po na sabihin sayo yan to the point na baka mag sawa kana kakasabi ko HAHAHA ps wag naman sana yun lang sorry kung ang random ng message nato ah HHAHAHA want kolang talaga na malaman mo na sayoo lang ako palagi yun langs thankyouu yanaa ily so much.<b>From: tintoy</b></p>"; // Replace with your message
+
+        // Append the message container to the body
+        bodyElement.appendChild(messageContainer);
+
+        // Fade in the message container
+        setTimeout(() => {
+          messageContainer.style.opacity = 1;
+        }, 100); // Start the fade-in effect almost immediately
+      }, 2100); // Slightly longer to ensure the image container is invisible
+    }
+  }
+
+  const audio = document.getElementById("myAudio");
+
+  audio.addEventListener('play', () => {
+    showNextImage();
+  });
+</script>
+
+</body>
+</html>
