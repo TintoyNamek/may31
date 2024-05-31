@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> birthday </title>
+    <style>
+        body {
+            background-color: pink;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            text-align: center;
+            width: 500px;
+            padding: 50px 20px;
+            border-radius: 15px;
+        }
+
+        button {
+            font-size: 20px;
+            border: 2px solid pink;
+            padding: 20px 25px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1> HI! CLICK ENTER, PLEASE :) </h1>
+        <button onclick="redirectToNewPage()"> ENTER </button>
+    </div>
+
+    <script>
+        // Function to redirect to a new HTML page
+        function redirectToNewPage() {
+            window.location.href = 'newpage.html'; // Replace 'newpage.html' with the actual path of the HTML page you want to redirect to
+        }
+    </script>
+</body>
+
+</html>
